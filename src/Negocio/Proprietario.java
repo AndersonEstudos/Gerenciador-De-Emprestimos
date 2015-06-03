@@ -1,6 +1,7 @@
 package Negocio;
 
-public class Usuario extends PadraoNegocio{
+public class Proprietario extends PadraoNegocio{
+	
 	
 	private int ID;
 	private String CPF;
@@ -8,7 +9,6 @@ public class Usuario extends PadraoNegocio{
 	private String sobrenome;
 	private String email;
 	private Endereco localizacao;
-	private Conta sistemaConta;
 	
 	@Override
 	public int getID() {
@@ -22,14 +22,14 @@ public class Usuario extends PadraoNegocio{
 		ID = id;
 	}
 
-	public String getCPF() {
-		return CPF;
-	}
-
 	public void setCPF(String cPF) {
 		CPF = cPF;
 	}
-
+	
+	public String getCPF() {
+		return CPF;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -61,15 +61,6 @@ public class Usuario extends PadraoNegocio{
 	public void setLocalizacao(Endereco localizacao) {
 		this.localizacao = localizacao;
 	}
+	
 
-	public Conta getSistemaConta() {
-		return sistemaConta;
-	}
-
-	public void setSistemaConta(Conta sistemaConta) {
-		this.sistemaConta = sistemaConta;
-	}
-	
-	
-	
 }

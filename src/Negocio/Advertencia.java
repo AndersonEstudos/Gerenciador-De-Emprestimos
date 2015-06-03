@@ -1,12 +1,12 @@
 package Negocio;
 
-public class Bloqueio extends PadraoNegocio {
+public class Advertencia extends PadraoNegocio {
+	
 	private int ID;
 	private Administrador administrador;
 	private Usuario cliente;
-	private String motivo;
-	private String DataInicio;
-	private String DataFim;
+	private String advertencia;
+	
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
@@ -35,28 +35,12 @@ public class Bloqueio extends PadraoNegocio {
 		this.cliente = cliente;
 	}
 
-	public String getMotivo() {
-		return motivo;
+	public String getAdvertencia() {
+		return advertencia;
 	}
 
-	public void setMotivo(String motivo) {
-		this.motivo = motivo;
-	}
-
-	public String getDataInicio() {
-		return DataInicio;
-	}
-
-	public void setDataInicio(String dataInicio) {
-		DataInicio = dataInicio;
-	}
-
-	public String getDataFim() {
-		return DataFim;
-	}
-
-	public void setDataFim(String dataFim) {
-		DataFim = dataFim;
+	public void setAdvertencia(String advertencia) {
+		this.advertencia = advertencia;
 	}
 	
 }
