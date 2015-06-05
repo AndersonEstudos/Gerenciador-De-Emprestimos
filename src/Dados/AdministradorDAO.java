@@ -1,5 +1,11 @@
 package Dados;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import Negocio.Administrador;
+import Negocio.PadraoNegocio;
+
 public class AdministradorDAO extends PadraoDAO {
 
 	public AdministradorDAO() throws ClassNotFoundException {
@@ -8,10 +14,32 @@ public class AdministradorDAO extends PadraoDAO {
 	}
 	
 	@Override
-	public boolean Inserir() {
+	public boolean Inserir(PadraoNegocio objeto) throws SQLException {
 		// TODO Auto-generated method stub
 		
-		return false;
+		Administrador objetoBD = (Administrador) objeto;
+		
+		// cria um preparedStatement
+        String sql = "INSERT INTO `GerenciadorEmprestimos`.`Administrador`" +
+                "(`Usuario_Cpf`,`Data_Inicio`,`Data_Fim`)" +
+                " values (?,?,?)";
+        PreparedStatement stmt = getConexao().prepareStatement(sql);
+
+        // preenche os valores
+        stmt.setString(1, objetoBD.getPessoa().getCPF());
+        stmt.setString(2, objetoBD.getDadaInicio());
+        stmt.setString(3, objetoBD.getDataFim());
+       
+
+        // executa
+        stmt.execute();
+        stmt.close();
+
+       
+
+        getConexao().close();
+		
+		return true;
 	}
 
 	@Override
@@ -21,9 +49,11 @@ public class AdministradorDAO extends PadraoDAO {
 	}
 
 	@Override
-	public boolean Update() {
+	public boolean Update(PadraoNegocio objeto) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	
 
 }

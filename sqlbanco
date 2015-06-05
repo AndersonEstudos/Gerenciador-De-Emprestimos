@@ -1,0 +1,109 @@
+delimiter $$
+
+CREATE TABLE `Administrador` (
+  `Usuario_Cpf` varchar(45) NOT NULL,
+  `idAdministrador` int(11) NOT NULL AUTO_INCREMENT,
+  `Data_Inicio` varchar(45) NOT NULL,
+  `Data_Fim` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idAdministrador`,`Usuario_Cpf`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+
+delimiter $$
+
+CREATE TABLE `Advertencia` (
+  `IDadvertencia` int(11) NOT NULL AUTO_INCREMENT,
+  `Administrador_Usuario_Cpf` varchar(45) NOT NULL,
+  `Usuario_Cpf` varchar(45) NOT NULL,
+  `Advertencia` varchar(45) NOT NULL,
+  PRIMARY KEY (`IDadvertencia`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+
+
+delimiter $$
+
+CREATE TABLE `Bloqueio` (
+  `IDbloqueio` int(11) NOT NULL AUTO_INCREMENT,
+  `Administrador_Usuario_Cpf` varchar(45) NOT NULL,
+  `Usuario_Cpf` varchar(45) NOT NULL,
+  `Motivo` varchar(45) DEFAULT NULL,
+  `Data_Inicio` varchar(45) DEFAULT NULL,
+  `Data_Fim` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`IDbloqueio`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+
+
+delimiter $$
+
+CREATE TABLE `Conta` (
+  `idConta` int(11) NOT NULL AUTO_INCREMENT,
+  `Conta_Login` varchar(255) NOT NULL,
+  `Conta_Senha` varchar(255) DEFAULT NULL,
+  `Numero_Advertencia` int(11) DEFAULT NULL,
+  `Numero_Bonificacao` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idConta`,`Conta_Login`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+
+
+delimiter $$
+
+CREATE TABLE `Contrato` (
+  `IDcontrato` varchar(45) NOT NULL,
+  `idEquipamento` int(11) NOT NULL,
+  `Proprietario_Cpf` int(11) NOT NULL,
+  `Usuario_Cpf` varchar(45) NOT NULL,
+  `Data_Inicio` varchar(45) NOT NULL,
+  `Data_Fim` varchar(45) NOT NULL,
+  `Exigencia` varchar(45) DEFAULT NULL,
+  `Preco` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+
+
+delimiter $$
+
+CREATE TABLE `Endereco` (
+  `idEndereco` int(11) NOT NULL AUTO_INCREMENT,
+  `Rua` varchar(45) NOT NULL,
+  `Cidade` varchar(45) NOT NULL,
+  `Bairro` varchar(45) NOT NULL,
+  `Numero_` int(11) NOT NULL,
+  PRIMARY KEY (`idEndereco`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+
+
+delimiter $$
+
+CREATE TABLE `Equipamento` (
+  `idEquipamento` int(11) NOT NULL AUTO_INCREMENT,
+  `Endereco_idEndereco` int(11) NOT NULL,
+  `Proprietario_Cpf` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idEquipamento`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+
+
+delimiter $$
+
+CREATE TABLE `Proprietario` (
+  `idProprietario` int(11) NOT NULL AUTO_INCREMENT,
+  `CPF` varchar(45) NOT NULL,
+  `Dnome` varchar(45) NOT NULL,
+  `Dsobrenome` varchar(45) NOT NULL,
+  `Demail` varchar(45) NOT NULL,
+  `Endereco_id` varchar(45) NOT NULL,
+  PRIMARY KEY (`idProprietario`,`CPF`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+
+
+
+delimiter $$
+
+CREATE TABLE `Solicitacao` (
+  `IDsolicitacao` varchar(45) NOT NULL,
+  `idEquipamento` int(11) NOT NULL AUTO_INCREMENT,
+  `Usuario_Cpf` varchar(45) NOT NULL,
+  `Prioridade` varchar(45) DEFAULT NULL,
+  `Status` varchar(45) DEFAULT NULL,
+  `Data_solicitacao` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idEquipamento`,`IDsolicitacao`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+
+

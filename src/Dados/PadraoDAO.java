@@ -1,10 +1,12 @@
 package Dados;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+
 import Negocio.PadraoNegocio;
 
 
-public abstract class PadraoDAO {
+public abstract class PadraoDAO<T extends PadraoNegocio> {
 	
 	private Connection conexao;
 	
@@ -22,9 +24,9 @@ public abstract class PadraoDAO {
 		this.conexao = conexao;
 	}
 
-	public abstract boolean Inserir();
+	public abstract boolean Inserir(T objeto) throws SQLException;
 	public abstract boolean Remover();
-	public abstract boolean Update();
+	public abstract boolean Update(T objeto);
 
 	
 }

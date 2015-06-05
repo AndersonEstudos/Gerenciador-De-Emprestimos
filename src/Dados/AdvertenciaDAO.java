@@ -1,6 +1,11 @@
 package Dados;
 
-public class AdvertenciaDAO extends PadraoDAO{
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import Negocio.Advertencia;
+
+public class AdvertenciaDAO extends PadraoDAO<Advertencia>{
 
 	public AdvertenciaDAO() throws ClassNotFoundException {
 		super();
@@ -8,9 +13,30 @@ public class AdvertenciaDAO extends PadraoDAO{
 	}
 
 	@Override
-	public boolean Inserir() {
+	public boolean Inserir(Advertencia objeto) throws SQLException {
 		// TODO Auto-generated method stub
-		return false;
+		
+		// cria um preparedStatement
+        String sql = "INSERT INTO `GerenciadorEmprestimos`.`Advertencia`" +
+                "(`Administrador_Usuario_Cpf`,`Usuario_Cpf`,`Advertencia`)" +
+                " values (?,?,?)";
+        PreparedStatement stmt = getConexao().prepareStatement(sql);
+
+        // preenche os valores
+        stmt.setString(1, objeto.getAdministrador().getPessoa().getCPF());
+        stmt.setString(2, objeto.getCliente().getCPF());
+        stmt.setString(3, objeto.getAdvertencia());
+       
+
+        // executa
+        stmt.execute();
+        stmt.close();
+
+       
+
+        getConexao().close();
+		
+		return true;
 	}
 
 	@Override
@@ -20,9 +46,11 @@ public class AdvertenciaDAO extends PadraoDAO{
 	}
 
 	@Override
-	public boolean Update() {
+	public boolean Update(Advertencia objeto) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+
 
 }
