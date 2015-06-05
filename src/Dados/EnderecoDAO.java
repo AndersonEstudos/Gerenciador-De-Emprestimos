@@ -1,6 +1,11 @@
 package Dados;
 
-public class EnderecoDAO extends PadraoDAO {
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import Negocio.Endereco;
+
+public class EnderecoDAO extends PadraoDAO<Endereco> {
 
 	public EnderecoDAO() throws ClassNotFoundException {
 		super();
@@ -8,9 +13,32 @@ public class EnderecoDAO extends PadraoDAO {
 	}
 
 	@Override
-	public boolean Inserir() {
+	public boolean Inserir(Endereco objeto) throws SQLException {
 		// TODO Auto-generated method stub
-		return false;
+		
+		String sql = "INSERT INTO `GerenciadorEmprestimos`.`Endereco`" +
+                "(`Rua`,`Cidade`,`Bairro`,`Numero_`)" +
+                " values (?,?,?,?)";
+        
+        PreparedStatement stmt = getConexao().prepareStatement(sql);
+
+        // preenche os valores
+        stmt.setString(1, objeto.getRua());
+        stmt.setString(2, objeto.getCidade());
+        stmt.setString(3, objeto.getBairro());
+        stmt.setLong(4, objeto.getNumero());
+        ;
+       
+
+        // executa
+        stmt.execute();
+        stmt.close();
+
+       
+
+        getConexao().close();
+		
+		return true;
 	}
 
 	@Override
@@ -20,9 +48,11 @@ public class EnderecoDAO extends PadraoDAO {
 	}
 
 	@Override
-	public boolean Update() {
+	public boolean Update(Endereco objeto) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	
 
 }

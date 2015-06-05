@@ -4,9 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import Negocio.Administrador;
-import Negocio.PadraoNegocio;
 
-public class AdministradorDAO extends PadraoDAO {
+
+public class AdministradorDAO extends PadraoDAO <Administrador>{
 
 	public AdministradorDAO() throws ClassNotFoundException {
 		super();
@@ -14,10 +14,10 @@ public class AdministradorDAO extends PadraoDAO {
 	}
 	
 	@Override
-	public boolean Inserir(PadraoNegocio objeto) throws SQLException {
+	public boolean Inserir(Administrador objeto) throws SQLException {
 		// TODO Auto-generated method stub
 		
-		Administrador objetoBD = (Administrador) objeto;
+		
 		
 		// cria um preparedStatement
         String sql = "INSERT INTO `GerenciadorEmprestimos`.`Administrador`" +
@@ -26,9 +26,9 @@ public class AdministradorDAO extends PadraoDAO {
         PreparedStatement stmt = getConexao().prepareStatement(sql);
 
         // preenche os valores
-        stmt.setString(1, objetoBD.getPessoa().getCPF());
-        stmt.setString(2, objetoBD.getDadaInicio());
-        stmt.setString(3, objetoBD.getDataFim());
+        stmt.setString(1, objeto.getPessoa().getCPF());
+        stmt.setString(2, objeto.getDadaInicio());
+        stmt.setString(3, objeto.getDataFim());
        
 
         // executa
@@ -49,7 +49,7 @@ public class AdministradorDAO extends PadraoDAO {
 	}
 
 	@Override
-	public boolean Update(PadraoNegocio objeto) {
+	public boolean Update(Administrador objeto) {
 		// TODO Auto-generated method stub
 		return false;
 	}

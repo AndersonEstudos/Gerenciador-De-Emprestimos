@@ -1,6 +1,10 @@
  package Dados;
 
-public class TelefoneDAO extends PadraoDAO{
+import java.sql.SQLException;
+
+import Negocio.Telefone;
+
+public class TelefoneDAO extends PadraoDAO<Telefone>{
 
 	public TelefoneDAO() throws ClassNotFoundException {
 		super();
@@ -8,7 +12,7 @@ public class TelefoneDAO extends PadraoDAO{
 	}
 
 	@Override
-	public boolean Inserir() {
+	public boolean Inserir(Telefone objeto) throws SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -20,9 +24,10 @@ public class TelefoneDAO extends PadraoDAO{
 	}
 
 	@Override
-	public boolean Update() {
+	public boolean Update(Telefone objeto) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	
 }
