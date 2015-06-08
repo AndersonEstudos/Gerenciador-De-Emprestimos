@@ -2,20 +2,19 @@ package Dados;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import Negocio.PadraoNegocio;
 
-
 public abstract class PadraoDAO<T extends PadraoNegocio> {
-	
+
 	private Connection conexao;
-	
-	public PadraoDAO() throws ClassNotFoundException
-	{
+
+	public PadraoDAO() throws ClassNotFoundException {
 		Class.forName("com.mysql.jdbc.Driver");
 		conexao = new FabricaSessoes().getConnection();
 	}
-	
+
 	public Connection getConexao() {
 		return conexao;
 	}
@@ -25,9 +24,11 @@ public abstract class PadraoDAO<T extends PadraoNegocio> {
 	}
 
 	public abstract boolean Inserir(T objeto) throws SQLException;
-	public abstract boolean Remover();
-	public abstract boolean Update(T objeto);
 
-	
+	public abstract boolean Remover(T objeto) throws SQLException;
+
+	public abstract boolean Update(T objeto) throws SQLException;
+
+	public abstract ArrayList<T> BuscarID(int id) throws SQLException, ClassNotFoundException;
+
 }
-
