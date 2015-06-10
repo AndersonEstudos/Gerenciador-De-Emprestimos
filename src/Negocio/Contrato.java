@@ -3,14 +3,17 @@ package Negocio;
 public class Contrato extends PadraoNegocio {
 	
 	private int ID;
-	private Equipamento bike;
-	private Proprietario dono;
-	private Usuario cliente;
 	private String DataInicio;
 	private String DataFim;
 	private String exigencia;
 	private String preco;
+	private String Proprietario_Cpf;
+	private String Usuario_Cpf;
+	private int idEquipamento;
 	
+	private Equipamento bike;
+	private Proprietario dono;
+	private Usuario cliente;
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
@@ -77,6 +80,30 @@ public class Contrato extends PadraoNegocio {
 
 	public void setPreco(String preco) {
 		this.preco = preco;
+	}
+
+	public String getUsuario_Cpf() {
+		return Usuario_Cpf;
+	}
+
+	public void setUsuario_Cpf(String usuario_Cpf) {
+		Usuario_Cpf = usuario_Cpf;
+	}
+
+	public int getIdEquipamento() {
+		return idEquipamento;
+	}
+
+	public void setIdEquipamento(int idEquipamento) {
+		this.idEquipamento = idEquipamento;
+	}
+
+	public String getProprietario_Cpf() {
+		return Proprietario_Cpf;
+	}
+
+	public void setProprietario_Cpf(String proprietario_Cpf) {
+		Proprietario_Cpf = proprietario_Cpf;
 	}
 	
 }

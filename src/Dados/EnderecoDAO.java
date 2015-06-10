@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
 import Negocio.Endereco;
 
 public class EnderecoDAO extends PadraoDAO<Endereco> {
@@ -84,6 +83,36 @@ public class EnderecoDAO extends PadraoDAO<Endereco> {
 	public ArrayList<Endereco> BuscarID(int id) throws SQLException {
 		PreparedStatement stmt = getConexao().prepareStatement("select * from Endereco WHERE idEndereco = ?");
 		stmt.setLong(1, id);
+		ResultSet rs = stmt.executeQuery();
+
+		ArrayList<Endereco> lista = new ArrayList<Endereco>();
+
+		while (rs.next()) {
+
+		    // criando o objeto Contato
+		    Endereco local = new Endereco();
+		    local.setID(rs.getInt("idEndereco"));
+		    local.setRua(rs.getString("Rua"));
+	        local.setCidade(rs.getString("Cidade"));
+	        local.setBairro(rs.getString("Bairro"));
+	        local.setNumero(rs.getInt("Numero_"));
+	        
+	        // adicionando o objeto à lista
+		    lista.add(local);
+		}
+
+		rs.close();
+		stmt.close();
+
+		return lista;
+	}
+
+	@Override
+	public ArrayList<Endereco> SelectALL() throws SQLException,
+			ClassNotFoundException {
+		// TODO Auto-generated method stub
+		PreparedStatement stmt = getConexao().prepareStatement("select * from Endereco");
+		
 		ResultSet rs = stmt.executeQuery();
 
 		ArrayList<Endereco> lista = new ArrayList<Endereco>();

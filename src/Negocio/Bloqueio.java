@@ -2,11 +2,14 @@ package Negocio;
 
 public class Bloqueio extends PadraoNegocio {
 	private int ID;
-	private Administrador administrador;
-	private Usuario cliente;
 	private String motivo;
 	private String DataInicio;
 	private String DataFim;
+	private String Administrador_Cpf;
+	private String Usuario_Cpf; 
+	
+	private Administrador administrador;
+	private Usuario cliente;
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
@@ -57,6 +60,22 @@ public class Bloqueio extends PadraoNegocio {
 
 	public void setDataFim(String dataFim) {
 		DataFim = dataFim;
+	}
+
+	public String getAdministrador_Cpf() {
+		return Administrador_Cpf;
+	}
+
+	public void setAdministrador_Cpf(String administrador_Cpf) {
+		Administrador_Cpf = administrador_Cpf;
+	}
+
+	public String getUsuario_Cpf() {
+		return Usuario_Cpf;
+	}
+
+	public void setUsuario_Cpf(String usuario_Cpf) {
+		Usuario_Cpf = usuario_Cpf;
 	}
 	
 }

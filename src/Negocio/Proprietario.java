@@ -8,6 +8,8 @@ public class Proprietario extends PadraoNegocio{
 	private String nome;
 	private String sobrenome;
 	private String email;
+	private String idEndereco;
+	
 	private Endereco localizacao;
 	
 	@Override
@@ -60,6 +62,14 @@ public class Proprietario extends PadraoNegocio{
 
 	public void setLocalizacao(Endereco localizacao) {
 		this.localizacao = localizacao;
+	}
+
+	public String getIdEndereco() {
+		return idEndereco;
+	}
+
+	public void setIdEndereco(String idEndereco) {
+		this.idEndereco = idEndereco;
 	}
 	
 

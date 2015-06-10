@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 import Negocio.PadraoNegocio;
 
 public abstract class PadraoDAO<T extends PadraoNegocio> {
@@ -30,5 +31,7 @@ public abstract class PadraoDAO<T extends PadraoNegocio> {
 	public abstract boolean Update(T objeto) throws SQLException;
 
 	public abstract ArrayList<T> BuscarID(int id) throws SQLException, ClassNotFoundException;
+	
+	public abstract ArrayList<T> SelectALL() throws SQLException, ClassNotFoundException;
 
 }

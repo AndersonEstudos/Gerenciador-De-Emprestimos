@@ -118,6 +118,62 @@ public class AdvertenciaDAO extends PadraoDAO<Advertencia>{
 		    objeto.setAdministrador(listusaux2.get(0));
 		    objeto.setID(rs.getInt("IDadvertencia"));
 		    objeto.setAdvertencia(rs.getString("Advertencia"));
+		    objeto.setAdministrador_Cpf(rs.getString("Administrador_Usuario_Cpf"));
+		    objeto.setUsuario_Cpf("Usuario_Cpf");
+		   
+		  
+		
+
+		    // adicionando o objeto à lista
+		    lista.add(objeto);
+		    aux.close();
+		    aux2.close();
+		    stmt2.close();
+		    stmt3.close();
+		}
+
+		rs.close();
+		stmt.close();
+
+		return lista;
+	}
+
+	@Override
+	public ArrayList<Advertencia> SelectALL() throws SQLException,
+			ClassNotFoundException {
+		// TODO Auto-generated method stub
+		PreparedStatement stmt = getConexao().prepareStatement("select * from Advertencia");
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		
+		ArrayList<Advertencia> lista = new ArrayList<Advertencia>();
+
+		while (rs.next()) {
+			
+			PreparedStatement stmt2 = getConexao().prepareStatement("select idUsuario from Usuario,Advertencia where CPF = ?");
+			stmt2.setString(1,rs.getString("Usuario_Cpf"));
+			ResultSet aux = stmt2.executeQuery();
+			aux.next();
+	        
+			PreparedStatement stmt3 = getConexao().prepareStatement("select idAdministrador from Advertencia,Administrador where Usuario_Cpf = ?");
+			stmt3.setString(1,rs.getString("Administrador_Usuario_Cpf"));
+	        ResultSet aux2 = stmt3.executeQuery();
+	        aux2.next();
+		   
+	        ArrayList <Usuario> listusaux = new UsuarioDAO().BuscarID(aux.getInt("idUsuario"));
+	        ArrayList <Administrador> listusaux2 = new AdministradorDAO().BuscarID(aux2.getInt("idAdministrador"));
+	     	        
+	        // criando o objeto admin
+		    Advertencia objeto = new Advertencia();
+		    
+	
+		    objeto.setCliente(listusaux.get(0));
+		    objeto.setAdministrador(listusaux2.get(0));
+		    objeto.setID(rs.getInt("IDadvertencia"));
+		    objeto.setAdvertencia(rs.getString("Advertencia"));
+		    objeto.setAdministrador_Cpf(rs.getString("Administrador_Usuario_Cpf"));
+		    objeto.setUsuario_Cpf("Usuario_Cpf");
 		   
 		  
 		

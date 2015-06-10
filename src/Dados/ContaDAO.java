@@ -121,5 +121,42 @@ public class ContaDAO extends PadraoDAO <Conta>{
 		return lista;
 	}
 
+
+
+	@Override
+	public ArrayList<Conta> SelectALL() throws SQLException,
+			ClassNotFoundException {
+		// TODO Auto-generated method stub
+		PreparedStatement stmt = getConexao().prepareStatement("select * from Conta");
+				
+		ResultSet rs = stmt.executeQuery();
+		
+		
+		ArrayList<Conta> lista = new ArrayList<Conta>();
+
+		while (rs.next()) {
+		
+	        // criando o objeto admin
+		    Conta objeto = new Conta();
+		    
+		    objeto.setID(rs.getInt("idConta"));
+		    objeto.setLogin(rs.getString("Conta_Login"));
+		    objeto.setSenha(rs.getString("Conta_Senha"));
+		    objeto.setAdvertencia(rs.getInt("Numero_Advertencia"));
+		    objeto.setBonificacao(rs.getInt("Numero_Bonificacao"));
+		  
+		
+
+		    // adicionando o objeto à lista
+		    lista.add(objeto);
+		 
+		}
+
+		rs.close();
+		stmt.close();
+
+		return lista;
+	}
+
 	
 }

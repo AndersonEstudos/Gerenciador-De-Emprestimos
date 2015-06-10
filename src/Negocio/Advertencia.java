@@ -3,6 +3,9 @@ package Negocio;
 public class Advertencia extends PadraoNegocio {
 	
 	private int ID;
+	private String Administrador_Cpf;
+	private String Usuario_Cpf;
+	
 	private Administrador administrador;
 	private Usuario cliente;
 	private String advertencia;
@@ -41,6 +44,22 @@ public class Advertencia extends PadraoNegocio {
 
 	public void setAdvertencia(String advertencia) {
 		this.advertencia = advertencia;
+	}
+
+	public String getAdministrador_Cpf() {
+		return Administrador_Cpf;
+	}
+
+	public void setAdministrador_Cpf(String administrador_Cpf) {
+		Administrador_Cpf = administrador_Cpf;
+	}
+
+	public String getUsuario_Cpf() {
+		return Usuario_Cpf;
+	}
+
+	public void setUsuario_Cpf(String usuario_Cpf) {
+		Usuario_Cpf = usuario_Cpf;
 	}
 	
 }

@@ -7,6 +7,9 @@ public class Usuario extends PadraoNegocio{
 	private String nome;
 	private String sobrenome;
 	private String email;
+	private String Login;
+	private int idlocalizacao;
+	
 	private Endereco localizacao;
 	private Conta sistemaConta;
 	
@@ -20,6 +23,22 @@ public class Usuario extends PadraoNegocio{
 	public void setID(int id) {
 		// TODO Auto-generated method stub
 		ID = id;
+	}
+	
+	public String getLogin() {
+		return Login;
+	}
+
+	public void setLogin(String login) {
+		Login = login;
+	}
+
+	public int getIdlocalizacao() {
+		return idlocalizacao;
+	}
+
+	public void setIdlocalizacao(int idlocalizacao) {
+		this.idlocalizacao = idlocalizacao;
 	}
 
 	public String getCPF() {

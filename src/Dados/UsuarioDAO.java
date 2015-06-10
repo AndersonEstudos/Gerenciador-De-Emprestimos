@@ -118,7 +118,57 @@ public class UsuarioDAO extends PadraoDAO <Usuario>{
 		    objeto.setEmail(rs.getString("Uemail"));
 		    objeto.setNome(rs.getString("Unome"));
 		    objeto.setSobrenome(rs.getString("Usobrenome"));
+		    objeto.setLogin(rs.getString("Login"));
+		    objeto.setIdlocalizacao(rs.getInt("idlocalizacao"));
 		  
+		
+
+		    // adicionando o objeto à lista
+		    lista.add(objeto);
+		    aux.close();
+		    stmt2.close();
+		}
+
+		rs.close();
+		stmt.close();
+		
+
+		return lista;
+	}
+
+	@Override
+	public ArrayList<Usuario> SelectALL() throws SQLException,
+			ClassNotFoundException {
+		// TODO Auto-generated method stub
+		PreparedStatement stmt = getConexao().prepareStatement("select * from Usuario");
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		
+		ArrayList<Usuario> lista = new ArrayList<Usuario>();
+
+		while (rs.next()) {
+		
+			PreparedStatement stmt2 = getConexao().prepareStatement("select idConta from Usuario,Conta where Conta_Login = ?");
+			stmt2.setString(1,rs.getString("Login"));
+			ResultSet aux = stmt2.executeQuery();
+	        aux.next();
+		   
+	        ArrayList <Endereco> listaux = new EnderecoDAO().BuscarID(rs.getInt("idLocalizacao"));
+	        ArrayList <Conta> listaux2 = new ContaDAO().BuscarID(aux.getInt("idConta"));
+			
+	        // criando o objeto admin
+		    Usuario objeto = new Usuario();
+		    
+		    objeto.setLocalizacao(listaux.get(0)); 
+		    objeto.setSistemaConta(listaux2.get(0));
+		    objeto.setID(rs.getInt("idUsuario"));
+		    objeto.setCPF(rs.getString("CPF"));
+		    objeto.setEmail(rs.getString("Uemail"));
+		    objeto.setNome(rs.getString("Unome"));
+		    objeto.setSobrenome(rs.getString("Usobrenome"));
+		    objeto.setLogin(rs.getString("Login"));
+		    objeto.setIdlocalizacao(rs.getInt("idlocalizacao"));
 		
 
 		    // adicionando o objeto à lista

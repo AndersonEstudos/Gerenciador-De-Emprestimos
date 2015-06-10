@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
 import Negocio.Endereco;
 import Negocio.Equipamento;
 import Negocio.Proprietario;
@@ -22,7 +21,7 @@ public class EquipamentoDAO extends PadraoDAO<Equipamento>{
 	public boolean Inserir(Equipamento objeto) throws SQLException {
 		// TODO Auto-generated method stub
 		String sql = "INSERT INTO `GerenciadorEmprestimos`.`Equipamento`" +
-                "(`Endereco_idEndereco`,`Proprietario_Cpf`)" +
+                "(`Endereco_idEndereco`,`Proprietario_Cpf`,`Disponivel`)" +
                 " values (?,?)";
         
         PreparedStatement stmt = getConexao().prepareStatement(sql);
@@ -30,6 +29,7 @@ public class EquipamentoDAO extends PadraoDAO<Equipamento>{
         // preenche os valores
         stmt.setLong(1, objeto.getLocalizacao().getID());
         stmt.setString(2, objeto.getDono().getCPF());
+        stmt.setString(3, objeto.isDisponivel());
         
        
 
@@ -63,7 +63,7 @@ public class EquipamentoDAO extends PadraoDAO<Equipamento>{
 	public boolean Update(Equipamento objeto) throws SQLException {
 		// TODO Auto-generated method stub
 		String sql = "UPDATE `GerenciadorEmprestimos`.`Equipamento`" +
-	             "SET `Endereco_idEndereco` = ?,`Proprietario_Cpf` = ?"
+	             "SET `Endereco_idEndereco` = ?,`Proprietario_Cpf` = ? , `Disponivel` = ?"
 	             + "WHERE `idEquipamento` = ?";
 		
 		PreparedStatement stmt = getConexao().prepareStatement(sql);
@@ -71,6 +71,7 @@ public class EquipamentoDAO extends PadraoDAO<Equipamento>{
 	 stmt.setLong(1, objeto.getLocalizacao().getID());
      stmt.setString(2, objeto.getDono().getCPF());          
      stmt.setLong(3, objeto.getID());
+     stmt.setString(4, objeto.isDisponivel());
      
      
      stmt.execute();
@@ -108,7 +109,55 @@ public class EquipamentoDAO extends PadraoDAO<Equipamento>{
 		    objeto.setLocalizacao(listaux.get(0)); 
 		    objeto.setID(rs.getInt("idEquipamento"));
 		    objeto.setDono(listaux2.get(0));
+		    objeto.setDisponivel(rs.getString("Disponivel"));
+		    objeto.setIdEndereco(rs.getInt("Endereco_idEndereco"));
+		    objeto.setProprietario_Cpf(rs.getString("Proprietario_Cpf"));
 		
+
+		    // adicionando o objeto à lista
+		    lista.add(objeto);
+		    aux.close();
+		    stmt2.close();
+		}
+
+		rs.close();
+		stmt.close();
+
+		return lista;
+	}
+
+	@Override
+	public ArrayList<Equipamento> SelectALL() throws SQLException,
+			ClassNotFoundException {
+		// TODO Auto-generated method stub
+		PreparedStatement stmt = getConexao().prepareStatement("select * from Equipamento");
+		
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		
+		ArrayList<Equipamento> lista = new ArrayList<Equipamento>();
+
+		while (rs.next()) {
+		
+			PreparedStatement stmt2 = getConexao().prepareStatement("select idProprietario from Equipamento,Proprietario where CPF = ?");
+			stmt2.setString(1,rs.getString("Proprietario_Cpf"));
+			ResultSet aux = stmt2.executeQuery();
+	        aux.next();
+	        
+	   	   
+	        ArrayList <Endereco> listaux = new EnderecoDAO().BuscarID(rs.getInt("Endereco_idEndereco"));
+			ArrayList<Proprietario> listaux2 = new ProprietarioDAO().BuscarID(aux.getInt("idProprietario"));
+	        // criando o objeto admin
+		    Equipamento objeto = new Equipamento();
+		   
+		    
+		    objeto.setLocalizacao(listaux.get(0)); 
+		    objeto.setID(rs.getInt("idEquipamento"));
+		    objeto.setDono(listaux2.get(0));
+		    objeto.setDisponivel(rs.getString("Disponivel"));
+		    objeto.setIdEndereco(rs.getInt("Endereco_idEndereco"));
+		    objeto.setProprietario_Cpf(rs.getString("Proprietario_Cpf"));
 		  
 		
 

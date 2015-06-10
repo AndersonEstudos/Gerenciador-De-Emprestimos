@@ -39,5 +39,12 @@ public class TelefoneDAO extends PadraoDAO<Telefone>{
 		return null;
 	}
 
+	@Override
+	public ArrayList<Telefone> SelectALL() throws SQLException,
+			ClassNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }

@@ -3,10 +3,11 @@ package Negocio;
 public class Administrador extends PadraoNegocio {
 
 	private int ID;
-	private Usuario pessoa;
 	private String DadaInicio;
 	private String DataFim;
-
+	private String Usuario_Cpf;
+	
+	private Usuario pessoa;
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
@@ -42,5 +43,11 @@ public class Administrador extends PadraoNegocio {
 	public void setDataFim(String dataFim) {
 		DataFim = dataFim;
 	}
-	
+	public String getUsuario_Cpf() {
+		return Usuario_Cpf;
+	}
+
+	public void setUsuario_Cpf(String usuario_Cpf) {
+		Usuario_Cpf = usuario_Cpf;
+	}
 }

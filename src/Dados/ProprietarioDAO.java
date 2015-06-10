@@ -112,6 +112,44 @@ public class ProprietarioDAO extends PadraoDAO<Proprietario>
 	        objeto.setNome(rs.getString("Dnome"));
 	        objeto.setSobrenome(rs.getString("Dsobrenome"));
 	        objeto.setLocalizacao(listaux.get(0));
+	        objeto.setIdEndereco("Endereco_id");
+	        
+	        // adicionando o objeto à lista
+		    lista.add(objeto);
+		}
+
+		rs.close();
+		stmt.close();
+
+		return lista;
+	}
+
+	@Override
+	public ArrayList<Proprietario> SelectALL() throws SQLException,
+			ClassNotFoundException {
+		// TODO Auto-generated method stub
+		PreparedStatement stmt = getConexao().prepareStatement("select * from Proprietario");
+		
+		ResultSet rs = stmt.executeQuery();
+
+		ArrayList<Proprietario> lista = new ArrayList<Proprietario>();
+
+		while (rs.next()) {
+			
+			
+		   
+	        ArrayList <Endereco> listaux = new EnderecoDAO().BuscarID(rs.getInt("Endereco_id"));
+	       
+		    // criando o objeto Contato
+		    Proprietario objeto = new Proprietario();
+		    
+		    objeto.setID(rs.getInt("idProprietario"));
+		    objeto.setCPF(rs.getString("CPF"));
+	        objeto.setEmail(rs.getString("Demail"));
+	        objeto.setNome(rs.getString("Dnome"));
+	        objeto.setSobrenome(rs.getString("Dsobrenome"));
+	        objeto.setLocalizacao(listaux.get(0));
+	        objeto.setIdEndereco("Endereco_id");
 	        
 	        // adicionando o objeto à lista
 		    lista.add(objeto);

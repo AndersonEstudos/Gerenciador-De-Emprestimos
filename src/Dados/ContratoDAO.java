@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
 import Negocio.Contrato;
 import Negocio.Equipamento;
 import Negocio.Proprietario;
@@ -134,6 +133,70 @@ public class ContratoDAO extends PadraoDAO <Contrato>{
 		    objeto.setDataInicio(rs.getString("Conta_Inicio"));
 		    objeto.setExigencia(rs.getString("Exigencia"));
 		    objeto.setPreco(rs.getString("Preco"));
+		    objeto.setIdEquipamento(rs.getInt("idEquipamento"));
+		    objeto.setUsuario_Cpf(rs.getString("Usuario_Cpf"));
+		    objeto.setProprietario_Cpf("Proprietario_Cpf");
+		  
+		
+
+		    // adicionando o objeto à lista
+		    lista.add(objeto);
+		    aux.close();
+		    aux2.close();
+		    stmt2.close();
+		    stmt3.close();
+		}
+
+		rs.close();
+		stmt.close();
+
+		return lista;
+	}
+
+
+
+	@Override
+	public ArrayList<Contrato> SelectALL() throws SQLException,
+			ClassNotFoundException {
+		// TODO Auto-generated method stub
+		PreparedStatement stmt = getConexao().prepareStatement("select * from Contrato");
+		
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		
+		ArrayList<Contrato> lista = new ArrayList<Contrato>();
+
+		while (rs.next()) {
+		
+			PreparedStatement stmt2 = getConexao().prepareStatement("select idUsuario from Usuario,Contrato where CPF = ?");
+			stmt2.setString(1,rs.getString("Usuario_Cpf"));
+			ResultSet aux = stmt2.executeQuery();
+	        aux.next();
+		   
+	        PreparedStatement stmt3 = getConexao().prepareStatement("select idProprietario from Contrato,Proprietario where CPF = ?");
+	        stmt3.setString(1,rs.getString("Proprietario_Cpf"));
+	        ResultSet aux2 = stmt3.executeQuery();
+	        aux2.next();
+		   
+	        ArrayList <Usuario> listusaux = new UsuarioDAO().BuscarID(aux.getInt("idUsuario"));
+	        ArrayList <Proprietario> listusaux2 = new ProprietarioDAO().BuscarID(aux2.getInt("idProprietario"));
+	        ArrayList <Equipamento> listaux3 = new EquipamentoDAO().BuscarID(rs.getInt("idEquipamento"));
+	        
+	        // criando o objeto admin
+		    Contrato objeto = new Contrato();
+		    
+		    objeto.setBike(listaux3.get(0));
+		    objeto.setCliente(listusaux.get(0));
+		    objeto.setDono(listusaux2.get(0));
+		    objeto.setID(rs.getInt("IDcontrato"));
+		    objeto.setDataFim(rs.getString("Data_Fim"));
+		    objeto.setDataInicio(rs.getString("Conta_Inicio"));
+		    objeto.setExigencia(rs.getString("Exigencia"));
+		    objeto.setPreco(rs.getString("Preco"));
+		    objeto.setIdEquipamento(rs.getInt("idEquipamento"));
+		    objeto.setUsuario_Cpf(rs.getString("Usuario_Cpf"));
+		    objeto.setProprietario_Cpf("Proprietario_Cpf");
 		  
 		
 
