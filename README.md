@@ -1,4 +1,5 @@
 Gerenciador-De-Emprestimos
+
 O projeto consiste no aluguel de bicicletas para uso público distribuídas em estações de serviço localizadas em pontos estratégicos de uma localidade para utilização a um baixo custo ou custo zero para o cliente na utilização em trajetos curtos.
 O foco foi inicialmente pensado para ser utilizado no âmbito da UFRN porém notou-se que o modelo pode ser expandido para outros lugares com extrema facilidade já que estamos em uma região turística onde as pessoas buscam se exercitar através do esporte e do lazer.
 Outro objetivo é conseguir influenciar o ambiente para que as pessoas comecem a encarar a bicicleta como um meio de transporte, econômico, saudável, ecologicamente correto e viável.
